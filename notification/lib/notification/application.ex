@@ -1,4 +1,4 @@
-defmodule Marketplace.Application do
+defmodule Notification.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,15 +8,14 @@ defmodule Marketplace.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Marketplace.Worker.start_link(arg)
-      # {Marketplace.Worker, arg}
-      Marketplace.Repo,
-      Marketplace.KafkaHandler
+      # Starts a worker by calling: Notification.Worker.start_link(arg)
+      # {Notification.Worker, arg}
+      Notification.KafkaHandler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Marketplace.Supervisor]
+    opts = [strategy: :one_for_one, name: Notification.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

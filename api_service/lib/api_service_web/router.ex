@@ -8,6 +8,6 @@ defmodule ApiServiceWeb.Router do
   scope "/api", ApiServiceWeb do
     pipe_through :api
 
-    post "/item/buy", ApiController, :buy
+    post "/item/list", ApiController, :list
   end
 end

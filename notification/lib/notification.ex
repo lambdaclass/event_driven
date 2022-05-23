@@ -1,6 +1,6 @@
-defmodule Marketplace do
+defmodule Notification do
   @moduledoc """
-  Documentation for `Marketplace`.
+  Documentation for `Notification`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Marketplace do
 
   ## Examples
 
-      iex> Marketplace.hello()
+      iex> Notification.hello()
       :world
 
   """

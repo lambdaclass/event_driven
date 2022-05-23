@@ -1,6 +1,6 @@
 import Config
 
-config :marketplace, Marketplace.Repo,
+config :escrow, Escrow.Repo,
   username: "postgres",
   password: "postgres",
   database: "database_dev",

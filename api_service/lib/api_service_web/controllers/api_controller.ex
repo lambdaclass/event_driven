@@ -1,16 +1,16 @@
 defmodule ApiServiceWeb.ApiController do
   use ApiServiceWeb, :controller
 
-  @purchases_topic "purchases"
+  @listings_topic "listings"
 
-  def buy(conn, %{"item_id" => item_id, "amount" => amount, "buyer_id" => buyer_id}) do
+  def list(conn, %{"item_id" => item_id, "price" => price, "buyer_id" => buyer_id}) do
     KafkaEx.produce(
-      @purchases_topic,
+      @listings_topic,
       0,
       Jason.encode!(%{
-        "status" => "awaiting_transfer",
+        "event" => "listing_intent",
         "item_id" => item_id,
-        "amount" => amount,
+        "price" => price,
         "buyer_id" => buyer_id
       })
     )

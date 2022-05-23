@@ -1,11 +1,5 @@
 import Config
 
-config :marketplace, Marketplace.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "database_dev",
-  hostname: "localhost"
-
 config :kafka_ex,
   # A list of brokers to connect to. This can be in either of the following formats
   #

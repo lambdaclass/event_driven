@@ -5,7 +5,7 @@ config :api_service, ApiService.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "api_service_dev",
+  database: "database_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
