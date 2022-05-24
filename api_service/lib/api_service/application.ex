@@ -15,9 +15,17 @@ defmodule ApiService.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ApiService.PubSub},
       # Start the Endpoint (http/https)
-      ApiServiceWeb.Endpoint
+      ApiServiceWeb.Endpoint,
       # Start a worker by calling: ApiService.Worker.start_link(arg)
       # {ApiService.Worker, arg}
+      ApiService.KafkaHandler,
+      %{
+        id: Registry.RequestIdPIDWorker,
+        start: {Registry, :start_link, [
+          [keys: :unique, name: Registry.RequestIdPID, partitions: System.schedulers_online()]
+        ]},
+        type: :worker
+      }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

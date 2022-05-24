@@ -82,6 +82,20 @@ defmodule Marketplace.KafkaHandler do
     {:ok, _} = Marketplace.Listing.set_as_published(item_id)
   end
 
+  defp handle_data(%{"event" => "listing_list", "request_id" => request_id, "params" => params}) do
+    Logger.info("Getting listing items with params: #{inspect(params)}")
+
+    items = Marketplace.Listing.list(params)
+    list_event = %{
+      "event" => "listing_list_result",
+      "request_id" => request_id,
+      "items" => items
+    }
+
+    Logger.info("Returning #{length(items)} listing items...")
+    :ok = KafkaEx.produce(@listings_topic, 0, Jason.encode!(list_event))
+  end
+
   defp handle_data(%{"event" => "item_escrow"} = data) do
     :nothing
   end

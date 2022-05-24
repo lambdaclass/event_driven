@@ -4,6 +4,7 @@ defmodule Marketplace.Listing do
   alias Marketplace.Repo
   import Ecto.Query
 
+  @derive {Jason.Encoder, only: [:item_id, :status]}
   schema "listings" do
     field(:status, :string)
     field(:item_id, :string)
@@ -27,5 +28,9 @@ defmodule Marketplace.Listing do
     |> Repo.one()
     |> changeset(%{status: "published"})
     |> Repo.update()
+  end
+
+  def list(_params) do
+    Repo.all(__MODULE__)
   end
 end
